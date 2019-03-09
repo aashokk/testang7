@@ -1,21 +1,103 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}! intial
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<h1>If Else True False stage</h1>
+<p>
+  <input type="radio" name="radio1" (click)="checkValid(true)" /> True
+  <input type="radio" name="radio1" (click)="checkValid(false)" /> False
+</p>
+<p>{{isvalid}}</p>
+<p *ngIf="isvalid; then validDiv; else elseDiv"></p>
+  <ng-template #validDiv>
+    This is Valid
+  </ng-template>
+  <ng-template #elseDiv>
+    This is not valid
+  </ng-template>
+
+  <h1>dropdown choosen Swithcase</h1>
+<select (change)="changeOption($event)">
+  <option value="choose">Select</option>
+  <option value="one">One</option>
+  <option value="two">Two</option>
+  <option value="three">Three</option>
+</select>
+
+<div [ngSwitch]="choosen">
+  <p *ngSwitchCase="'one'">One</p>
+  <p *ngSwitchCase="'two'">Two</p>
+  <p *ngSwitchCase="'three'">Three</p>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+
+<h1>NG For</h1>
+<ul *ngFor="let details of studentDetails">
+  <li>{{details.name}}</li>
+</ul>
+
+<h1>NG Group</h1>
+<ul *ngFor = "let detailGroup of studentDetailsGroup">
+  <li>{{detailGroup.country}}
+    <ul *ngFor="let people of detailGroup.people">
+      <li>{{people.name}}</li>
+    </ul>
   </li>
 </ul>
 
+<h1>Data Binding</h1>
+<p><input [value]="data"  (input)="data=$event.target.value"  />
+{{data}}</p>
+<br />
+<p><input [(ngModel)]="data1" /> {{data1}}</p>
+
+<h1>Pipe</h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Designation</th>
+  </tr>
+  <tr *ngFor="let details of studentDetails">
+    <td>{{details.name | uppercase}}</td>
+    <td>{{details.des}}</td>
+  </tr>
+</table>
+
+<h1>Date parameterized pipe</h1>
+<p>{{pipeDate | date : medium | lowercase}}</p>
+<p>{{pipeDate | date : "dd/mm/yyyy"}}</p>
+<p>{{pipeDate | date : "fullDate"}}</p>
+<p>{{pipeCurrency | currency : "INR"}}</p>
+
+<h1>Custom pipe by creating external </h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Designation</th>
+  </tr>
+  <tr *ngFor="let details of studentDetails">
+    <td>{{details.name | mypipe : details.gender}}</td>
+    <td>{{details.des}}</td>
+  </tr>
+</table>
+
+<h1>Router</h1>
+<a [routerLink] = "['./student']"> Student</a>----
+<a [routerLink] = "['./studentdetails']" >Student Details</a>----
+<a [routerLink] = "['./students']"> Student</a>
+<button class="btn btn-primary" (click)="student()">Student</button>
 <router-outlet></router-outlet>
+
+<h1>Service</h1>
+<p>{{text}}</p>
+
+<h1>Service Call</h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Empid</th>
+  </tr>
+  <tr *ngFor="let emp of employee">
+    <td>{{emp.name}}</td>
+    <td>{{emp.empid}}</td>
+  </tr>
+</table>
+
+<h1>Install bootstrap</h1>
+<button class="btn btn-success">Click</button>
+<br /><br /><br /><br />
